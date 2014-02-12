@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=1100">
+<title>Facebook Friends</title>
+<link rel="stylesheet" type="text/css" href="./dist/css/bootstrap.css">
+
+<script type="text/javascript" src="./scripts/jquery-1.11.0.js"></script>
+<script type="text/javascript" src="./dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="./scripts/lodash.underscore.js"></script>
+<script type="text/javascript" src="./scripts/backbone.js"></script>
+
+
+<!-- DataSource -->
+<script type="text/javascript" src="./app/friends.js"></script>
+<script src="app/models/FriendModel.js" type="text/javascript" ></script>
+
+
+<!-- Template Friends -->
+<script type="text/htm" id="tmpl_friend">
+<div class="col-md-4" style="text-align:center;margin-bottom:1em;">
+  <img src="<%= pic %>" class="img-thumbnail" style="height:100px;">
+  <div><b><%= first_name %> <%= last_name %></b> </br> Nb Likes : <b><%= likes_count %></b> Nb Amis : <b><%= friend_count %></b>
+</div>
+</script>
+
+
+<!-- Template Friends sexe -->
+<script type="text/htm" id="tmpl_sexe">
+<p><b>Résultats de la recherche : </br>
+ 
+    <div class="col-md-2" style="text-align:center;margin-bottom:1em;">
+    <div><p><b>Hommes: <%= men %>%</b></p></div><div><p><b>Femmes: <%= women %>%</b></p></div>
+  </div>
+</script>
+
+<script src="app/views/AppView.js" type="text/javascript" ></script>
+
+<script src="app/collections/FriendCollection.js" type="text/javascript" ></script>
+
+<script src="app/views/AppView.js" type="text/javascript" ></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+ <a href="" class="logoFacebook"><img src="img/logo_facebook.jpg" alt="" /></a>
+  
+  <div class="col-md-3"> 
+   <h3>Facebook Friends App</h3></br>
+
+   <p>Rechercher par nom</p>
+      <input type="text" id="search_last" class="form-control" placeholder="Recherche par nom"></br>  
+   <p>Rechercher par prénom</p>  
+      <input type="text" id="search" class="form-control" placeholder="Recherce par Prénom"></br>
+
+ <p>Rechercher par nombre d'amis</p>
+      <input type="text" id="count_friend" class="form-control" placeholder="Recherche par nombre d'amis"></br>
+
+    <!--
+    <p>Rechercher par nombre de like</p>
+      <input type="text" id="count_likes" class="form-control" placeholder="Recherche par nombre de like"></br>
+      -->
+    
+  
+  	<div id="sexe_container" class="col-md-12">
+  	</div>
+  </div> 
+  	
+  
+  <div class="col-md-8">
+     <h2 style = "text-align:center" >Liste des Amis</h2>	
+      <div class="row" id="trombinoscope">
+        <div class="col-lg-6">
+        </div>
+     </div>
+  
+  <div class="header">
+    <div class="pull-right"></div>
+    </div>
+  </div>
+
+<script  type="text/javascript" >
+var collection = new FriendCollection(friends);
+var app = new AppView({
+  el:$('#trombinoscope')[0],
+  collection:collection
+});
+</script>
+
+<script  type="text/javascript">
+var collection = new FriendCollection(friends);
+var app = new AppView({
+  el:$('#sexe_container')[0],
+  collection:collection
+});
+</script>
+
+
+<script type="text/javascript">
+var collection = new FriendCollection();
+var app = new AppView({
+  el:$('.container')[0],
+  collection:collection
+});
+collection.reset(friends);
+</script>
+
+</body>
+</html>
